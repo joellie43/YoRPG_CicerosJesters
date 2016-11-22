@@ -1,0 +1,13 @@
+//Cicero's Jesters(James Smith, Joelle Lum)
+//APCS1 pd5
+//HW31 -- Ye Olde Role Playing Game, Improved
+//2016-11-17
+
+public class Monster extends Character{
+    public Monster(){	
+	hp = 150;
+	defense = 20;
+	attackRating = 1.0;
+	strength = (int)(Math.random()*45 + 20);
+    }
+}
