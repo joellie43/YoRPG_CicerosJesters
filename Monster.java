@@ -10,4 +10,14 @@ public class Monster extends Character{
 	attackRating = 1.0;
 	strength = (int)(Math.random()*45 + 20);
     }
+
+    public String about(){
+	return "The ugly beast";
+    }
+
+    public void specialize(){
+    }
+
+    public void normalize(){
+    }
 }
