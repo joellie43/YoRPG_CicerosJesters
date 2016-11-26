@@ -130,6 +130,7 @@ public class YoRPG
     {
 	int i = 1;
 	int d1, d2;
+	Double[] debuffStats = {.0,.0,.0};
 
 	if ( Math.random() >= ( difficulty / 3.0 ) )
 	    System.out.println( "\nNothing to see here. Move along!" );
@@ -144,23 +145,36 @@ public class YoRPG
 		// If you land a hit, you incur greater damage,
 		// ...but if you get hit, you take more damage.
 		try {
-		    System.out.println( "\nDo you feel lucky?" );
-		    System.out.println( "\t1: Nay.\n\t2: Aye!" );
+		    System.out.println( "\nChoose your attack:" );
+		    System.out.println( "\t1: Normal Attack\n\t2: Special Attack!\n\t3: Debuff the enemy\nYour Choice: " );
 		    i = Integer.parseInt( in.readLine() );
 		}
 		catch ( IOException e ) { }
-
-		if ( i == 2 )
+		
+		boolean debuffChoice = false;
+		
+		if ( i == 2 ){
 		    pat.specialize();
-		else
+		}
+		else if (i == 3){
+		    debuffStats = pat.debuff(smaug);
+		    debuffChoice = true;
+		}
+		else{
 		    pat.normalize();
-
-		d1 = pat.attack( smaug );
+		}
+		
+		if (!debuffChoice){
+		    d1 = pat.attack( smaug );
+		    System.out.println( "\n" + pat.getName() + " dealt " + d1 +
+					" points of damage.");
+		}
+		else {
+		    System.out.println("\n" + pat.getName() + " decreased Ye Old Monster's attack rating by " +
+				       debuffStats[0] + ", its strength by " + debuffStats[1] + ", and its defense by " + debuffStats[2]);
+		}
+		smaug.monsterAI(pat);//Method to give smaug some intelligence when fighting
 		d2 = smaug.attack( pat );
-
-		System.out.println( "\n" + pat.getName() + " dealt " + d1 +
-				    " points of damage.");
-
 		System.out.println( "\n" + "Ye Olde Monster smacked " + pat.getName() +
 				    " for " + d2 + " points of damage.");
 	    }//end while

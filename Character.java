@@ -29,6 +29,18 @@ public abstract class Character{
 	hp-=damage;
     }
 
+    public void lowerAttackRating(double rate){
+	attackRating -= rate;
+    }
+
+    public void lowerStrength(int lowStren){
+	strength -= lowStren;
+    }
+
+    public void lowerDefense(int lowDef){
+	defense -= lowDef;
+    }
+
     public int attack(Character creep){
 	int damage = (int)(strength * attackRating) - creep.getDefense();
 	if (damage < 0){
@@ -36,6 +48,14 @@ public abstract class Character{
 	}
 	creep.lowerHP(damage);
 	return damage;
+    }
+
+    public Double[] debuff( Character creep){
+	Double[] debuffStats = {0.2, 15., 8.};
+	creep.lowerAttackRating(0.2);
+	creep.lowerStrength(15);
+	creep.lowerDefense(8);
+	return debuffStats;
     }
     
     public abstract void specialize();

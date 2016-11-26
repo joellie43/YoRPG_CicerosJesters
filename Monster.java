@@ -16,8 +16,26 @@ public class Monster extends Character{
     }
 
     public void specialize(){
+	normalize();
+	defense -= 10;
+	attackRating += 0.4;
+	strength += 10;
+	isSpec = true;
     }
 
     public void normalize(){
+	if (isSpec){
+	    defense += 10;
+	    attackRating -= 0.4;
+	    strength -=10;
+	    isSpec = false;
+	}
     }
+
+    public void monsterAI(Character enemy){//gives monster a chance to do more damage if they can execute the player, are about to die, or randomly with a 5% chance
+	if ((enemy.hp <= ((int)((strength + 10) * (attackRating + 0.4) - enemy.getDefense())))||  hp < 15 || Math.random() <= .05){
+	    specialize();
+	}
+    }
+	
 }
